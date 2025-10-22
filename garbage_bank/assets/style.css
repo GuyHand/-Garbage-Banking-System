@@ -1,0 +1,84 @@
+.menu {
+    text-align: center;
+}
+:root {
+  --bg: #f4fbf3;
+  --card: #ffffff;
+  --accent: #2f8f4b;
+  --muted: #6b6b6b;
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(180deg, var(--bg), #eef7ee);
+  color: #12321f;
+  padding: 20px;
+}
+
+.container { max-width: 1100px; margin: 0 auto; }
+
+.header {
+  display:flex; align-items:center; gap:16px;
+  margin-bottom: 18px;
+}
+
+
+.logo {
+  width:64px; height:64px; border-radius:12px;
+  background: var(--accent); color: #fff; display:flex; align-items:center; justify-content:center;
+  font-weight:700; font-size:20px;
+  box-shadow: 0 6px 20px rgba(47,143,75,0.15);
+}
+
+nav a { margin-right:12px; color: #0b3b1a; text-decoration:none; font-weight:600; }
+.card { background: var(--card); padding:18px; border-radius:12px; box-shadow: 0 6px 18px rgba(0,0,0,0.06); }
+
+.form-row { display:flex; gap:12px; margin-bottom:12px; }
+.form-row .col { flex:1; }
+
+.input, select { width:100%; padding:10px 12px; border-radius:8px; border:1px solid #e6f0ea; background:#fbfff9; }
+
+.btn { background:var(--accent); color:white; padding:10px 14px; border-radius:8px; border:none; cursor:pointer; font-weight:700; }
+.btn.secondary { background:transparent; color:var(--accent); border:1px solid var(--accent); }
+
+.table { width:100%; border-collapse:collapse; margin-top:12px; }
+.table th, .table td { text-align:left; padding:10px 8px; border-bottom:1px solid #eef5ec; }
+.table th { font-weight:700; color:var(--muted); }
+
+.small { font-size:13px; color:var(--muted); }
+.image-thumb { width:64px; height:64px; object-fit:cover; border-radius:8px; border:1px solid #eef6ee; }
+.footer { margin-top:20px; text-align:center; color:var(--muted); font-size:13px; }
+.logo {
+  width:64px; height:64px; border-radius:12px;
+  background: var(--accent); color: #fff; display:flex; align-items:center; justify-content:center;
+  font-weight:700; font-size:20px;
+  box-shadow: 0 6px 20px rgba(47,143,75,0.15);
+}
+
+/* VVVVV เพิ่มส่วนนี้เข้าไป VVVVV 
+  (นี่คือการจัดสไตล์ให้ "กล่อง" ที่เก็บเมนู)
+*/
+nav {
+  flex: 1;            /* 1. สั่งให้กล่องเมนูขยายเต็มพื้นที่ที่เหลือ */
+  text-align: center; /* 2. สั่งให้เมนู (<a>) ที่อยู่ข้างใน จัดกลาง */
+}
+
+/* VVVVV แก้ไขส่วนนี้เล็กน้อย VVVVV
+  (เปลี่ยนจาก margin-right เป็น margin ซ้าย-ขวา เพื่อให้ระยะห่างสวยงาม)
+*/
+nav a { 
+  /* margin-right:12px; (ลบอันเก่าออก) */
+  margin: 0 8px; /* (ใช้อันนี้แทน) เพิ่มระยะห่างซ้าย-ขวา 8px */
+  color: #0b3b1a; 
+  text-decoration:none; 
+  font-weight:600; 
+}
+
+.card { 
+  background: var(--card); 
+  padding:18px; 
+  border-radius:12px; 
+  box-shadow: 0 6px 18px rgba(0,0,0,0.06); 
+}
