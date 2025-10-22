@@ -34,9 +34,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 $rates = $pdo->query('SELECT * FROM rates ORDER BY type_name')->fetchAll(PDO::FETCH_ASSOC);
 ?>
-<!doctype html><html lang="th"><head><meta charset="utf-8"><title>อัตราแต้ม & รูปภาพขยะ</title><link rel="stylesheet" href="assets/style.css"></head>
+<!doctype html><html lang="th"><head><meta charset="utf-8"><title>อัตราแต้ม</title><link rel="stylesheet" href="assets/style.css"></head>
 <body><div class="container">
-  <div class="header"><div class="logo">ธข</div><div><h2>อัตราแต้ม & รูปภาพขยะ</h2></div><div style="margin-left:auto"><a href="index.php" class="btn secondary">กลับ</a></div></div>
+  <div class="header"><div class="logo">ธข</div><div><h2>อัตราแต้ม </h2></div><div style="margin-left:auto"><a href="index.php" class="btn secondary">กลับ</a></div></div>
   <div class="card">
     <h3>เพิ่ม/แก้ไขประเภทขยะ</h3>
     <form method="post" enctype="multipart/form-data">
@@ -53,8 +53,44 @@ $rates = $pdo->query('SELECT * FROM rates ORDER BY type_name')->fetchAll(PDO::FE
       <td><?php echo htmlspecialchars($r['type_name']); ?></td><td><?php echo $r['point_per_kg']; ?></td>
       <td>
         <form style="display:inline" method="post"><input type="hidden" name="delete_id" value="<?php echo $r['id']; ?>"><button class="btn secondary">ลบ</button></form>
+        <button 
+            type="button" 
+            class="btn" 
+            onclick="editRate(<?php echo htmlspecialchars(json_encode($r), ENT_QUOTES, 'UTF-8'); ?>)">
+            แก้ไข
+        </button>
       </td></tr>
     <?php endforeach; ?>
     </tbody></table>
   </div>
-</div></body></html>
+</div>
+<script>
+// ฟังก์ชันสำหรับ "แก้ไข"
+function editRate(rate) {
+    // 'rate' คือ object ข้อมูลที่ถูกส่งมาจากปุ่ม (เช่น {id: 1, type_name: 'ขวดแก้ว', ...})
+
+    // 1. หาตัวฟอร์ม
+    const form = document.querySelector('form');
+
+    // 2. ยัดข้อมูลกลับเข้าไปในฟอร์ม
+    form.querySelector('input[name="id"]').value = rate.id;
+    form.querySelector('input[name="type_name"]').value = rate.type_name;
+    form.querySelector('input[name="point_per_kg"]').value = rate.point_per_kg;
+
+    // 3. (เสริม) เลื่อนหน้าจอขึ้นไปบนสุดเพื่อให้ผู้ใช้เห็นฟอร์ม
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    
+    // 4. (เสริม) ให้เคอร์เซอร์ไปรอที่ช่อง "ชื่อประเภท"
+    form.querySelector('input[name="type_name"]').focus();
+}
+
+// ฟังก์ชันสำหรับ "ล้างฟอร์ม"
+function resetForm() {
+    const form = document.querySelector('form');
+    form.reset(); // สั่งรีเซ็ตฟอร์ม
+    form.querySelector('input[name="id"]').value = ''; // เคลียร์ ID ที่ซ่อนไว้
+}
+</script>
+</body>
+
+</html>
